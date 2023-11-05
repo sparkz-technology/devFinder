@@ -1,13 +1,14 @@
 import { NavLink as Link } from "react-router-dom";
+import { ReactNode } from "react";
 
 type Props = {
-  children: React.ReactNode;
+  to: string; // Adding the 'to' prop to the Props type
+  children: ReactNode;
 };
 
 const NavLink: React.FC<Props> = (props) => {
   return (
-    <Link to="/" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white text-base first-letterfirst-line:
-    flex-grow text-center ">
+    <Link to={props.to} className="block mt-0 lg:inline-block text-white hover:text-white text-base first-letterfirst-line flex-grow text-center">
       {props.children}
     </Link>
   );

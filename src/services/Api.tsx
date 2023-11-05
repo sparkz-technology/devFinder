@@ -1,27 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-
-export interface Item {
-    login: string;
-    id: number;
-    node_id: string;
-    avatar_url: string;
-    gravatar_id: string;
-    url: string;
-    html_url: string;
-    followers_url: string;
-    subscriptions_url: string;
-    organizations_url: string;
-    repos_url: string;
-    received_events_url: string;
-    type: string;
-    score: number;
-}
-
-export interface User {
-    total_count: number;
-    incomplete_results: boolean;
-    items: Item[];
-}
+import { User } from '../interface/User';
+import { GitHubUser } from '../interface/UserAndRepos';
+const GITHUB_TOKEN = "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"
 
 export const search = async (username: string): Promise<User> => {
         const response: AxiosResponse<User> = await axios.get(`https://api.github.com/search/users?q=${username}`);
@@ -30,3 +10,16 @@ export const search = async (username: string): Promise<User> => {
     
 }
 
+export const userAndRepos = async (login: string) => {
+        const user = await getUser(login);
+        return user 
+}
+
+
+    
+    async function getUser(username: string) {
+        const response: AxiosResponse<GitHubUser> = await axios.get(`https://api.github.com/users/${username}`, {
+            headers: { Authorization: `token ${GITHUB_TOKEN}` },
+        });
+        return response.data;
+    }

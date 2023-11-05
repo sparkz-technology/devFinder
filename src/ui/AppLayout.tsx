@@ -1,14 +1,12 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Profile from "../components/Profile";
-import SearchBox from "../components/SearchBox";
+import { Outlet } from "react-router-dom";
 
 const AppLayout = () => {
     return (
-        <div className="flex flex-col min-h-screen bg-secondary relative">
+        <div className="flex flex-col min-h-screen bg-primary">
             <Navbar />
-            <SearchBox />
-            <Profile />
+            <Outlet />
             <Footer />
         </div>
     );

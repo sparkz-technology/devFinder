@@ -1,9 +1,9 @@
 import { useMutation, UseMutateFunction } from "@tanstack/react-query";
 // Import the 'search' function from the appropriate file, assuming it's part of the 'Api' module.
-import {  search ,User} from "../services/Api";
+import {  search } from "../services/Api";
 import { setData } from "../Slice";
 import { useDispatch } from "react-redux";
-
+import { User } from "../interface/User";
 interface SearchHook {
     data: User | undefined;
     mutate: UseMutateFunction<User, Error, string, unknown>;
@@ -20,7 +20,10 @@ const useSearch = (): SearchHook => {
         mutationFn,
         onSuccess: (data) => {
             dispatch(setData(data));
-        }
+        },
+        onError: (error) => {
+            console.log(error);
+        },
     });
 
     console.log(data); // For debugging purposes
