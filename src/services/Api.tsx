@@ -1,7 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { User } from '../interface/User';
 import { GitHubUser } from '../interface/UserAndRepos';
-const GITHUB_TOKEN = "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"
+// const GITHUB_TOKEN = "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"
+import { GITHUB_TOKEN } from '../Constants';
+console.log(GITHUB_TOKEN);
 
 export const search = async (username: string): Promise<User> => {
         const response: AxiosResponse<User> = await axios.get(`https://api.github.com/search/users?q=${username}`);
