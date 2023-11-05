@@ -1,5 +1,4 @@
 {
-    "homepage": "https://github.com/sparkz-technology/devFinder",
     "name": "devfinder",
     "private": true,
     "version": "0.0.0",
@@ -8,7 +7,6 @@
       "dev": "vite --host",
       "build": "tsc && vite build",
       "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-      "deploy": "vite build && gh-pages -d dist",
       "preview": "vite preview"
     },
     "dependencies": {
