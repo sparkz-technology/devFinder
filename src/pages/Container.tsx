@@ -8,6 +8,7 @@ import SearchBox from '../components/SearchBox';
 
 const Container: React.FC = () => {
     const { data } = useSelector((state: RootState) => state.user);
+    const searchTerms = useSelector((state: RootState) => state.user.searchTerms);
     const navigate =useNavigate()
 
     return (<>
@@ -39,14 +40,14 @@ const Container: React.FC = () => {
                         </div>
                     ))
                 ) }
-                {data === undefined && (
+                {data.total_count === 0 || data.incomplete_results  && (
                     <div className="text-2xl font-bold text-center text-gray-400 flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                         No data available
                     </div>
                 )}
                 
 
-                {data?.total_count === 0 && (
+                {searchTerms === '' && (
                     <div className="text-2xl font-bold text-center text-gray-400 flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                            Search for a user
                     </div>
