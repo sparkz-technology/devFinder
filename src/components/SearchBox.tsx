@@ -1,30 +1,23 @@
-// import { useEffect, useState } from 'react';
 import { BiSearchAlt } from 'react-icons/bi';
 import useSearch from '../hooks/useSearch';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData, setSearchTerms } from '../Slice';
 import { RootState } from '../Store';
+import Loading from '../ui/Loading';
 
 const SearchBox: React.FC = () => {
-  // const [searchTerm, setSearchTerm] = useState<string>('');
   const searchTerms = useSelector((state: RootState) => state.user.searchTerms);
   const { mutate ,status} = useSearch();
   const dispatch = useDispatch();
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSearchTerm = event.target.value;
-    // setSearchTerm(newSearchTerm);
     dispatch(setSearchTerms(newSearchTerm));
     if (newSearchTerm.length > 3) {
       mutate(newSearchTerm);
     }
   };
 
-  // useEffect(() => {
-  //   if(data){
-  //     searchTerm.length === 0 && dispatch(setData(undefined));
-  //   }
-  // }, [searchTerm, dispatch,data]);
   if(status === 'error'){
     return <div className='text-white'>Something went wrong</div>
   }
@@ -52,13 +45,9 @@ const SearchBox: React.FC = () => {
         >
           Clear
         </button>}
-        
         {status === 'pending' && <Loading />}
       </div>
-      
-          
     </div>
-      
         </>
   );
 };
@@ -66,9 +55,3 @@ const SearchBox: React.FC = () => {
 export default SearchBox;
 
 
-const Loading: React.FC = () => {
-  return (
-    <div className="flex justify-center items-center  absolute top-1.5 right-1.5 ">
-      <div className="animate-spin rounded-full h-7 w-7 border-t-2 border-b-2 border-cyan-500"></div>
-    </div>)
-}
